@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>WiXiGo</title>
+        <script type="text/javascript" src="cordova.js"></script>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+    <body>
+        <header id="header" align="center">
+            <div id="headleft" class="icon logout left clicked"></div>
+            <div id="headright" class="icon face right clicked"  onclick="show('home_screen')"></div>
+            <h1 id="title">Wixigo</h1>
+        </header>
+        <div id="space" style="height:70px"></div>
+
+        <!-- login -->
+        <div id="login" class="screen">
+			
+			<label>User :</label>
+            <input id="username" type="text" placeholder="User" class="input"></input>
+			
+			<label>Password :</label>
+            <input id="password" type="password" placeholder="password" class="input"></input>
+			
+            <div class="band clicked" id="btn1" align="center" onclick="loginwixi()">
+
+                <h1>Login</h1>
+            </div>
+
+            <div class="band clicked" id="btn2" align="center" onclick="show('deliver')">
+
+                <h1>Twitter</h1> 
+            </div>
+        </div>
+        <!-- login -->
+        <!-- home -->
+        <div id="home_screen" class="screenoff">
+            <div id="face" ></div>
+            <h1 id="name">Zakaria</h1>
+
+            <div class="stars">
+                <div id="fullstars" class="top"></div>
+            </div>
+
+            <div class="band clicked" id="btn1" align="center" onclick="show('order')">
+                <div class="icon cart left"></div>
+                <div class="icon arrowright right"></div>
+                <h1>Order</h1>
+            </div>
+
+            <div class="band clicked" id="btn2" align="center" onclick="show('deliver')">
+                <div class="icon arrowleft left"></div>  
+                <div class="icon deliver right"></div>
+                <h1>Deliver</h1> 
+            </div>
+        </div>
+        <!-- home -->
+
+        <!-- order -->        
+        <div id="order" class="screenoff">
+            <label>Tag a shop :</label>
+            <input type="text" id="filter" placeholder="place name" data-table="order-table" class="input filter"></input>
+            <div id="tagliste">
+				<table class="order-table table" id="tagtable" style="width:100%;"><tbody>
+					<tr onclick="addtag('bestbuy')" style="background-image:url('img/bestbuy.png');"><td>Bestbuy</td><td class="brand"></td></tr>
+					<tr onclick="addtag('aldo')" style="background-image:url('img/aldo.png');"><td>Aldo</td></tr>
+					<tr onclick="addtag('canadian_tire')" style="background-image:url('img/canadian_tire.png');"><td>canadian tire</td></tr>
+					<tr onclick="addtag('foot_locker')" style="background-image:url('img/foot_locker.png');"><td>Foot Locker</td></tr>
+					<tr onclick="addtag('gap')" style="background-image:url('img/gap.png');"><td>GAP</td></tr>
+					<tr onclick="addtag('la_senza')" style="background-image:url('img/la_senza.png');"><td>La Senza</td></tr>
+					<tr onclick="addtag('oldnavy')" style="background-image:url('img/oldnavy.png');"><td>Old Navy</td></tr>
+					<tr onclick="addtag('rudsak')" style="background-image:url('img/rudsak.png');"><td>Rudsak</td></tr>
+					<tr onclick="addtag('guess')" style="background-image:url('img/guess.png');"><td>Guess</td></tr>
+					<tr onclick="addtag('le_chateau')" style="background-image:url('img/le_chateau.png');"><td>Le Château</td></tr>
+					<tr onclick="addtag('levis')" style="background-image:url('img/levis.png');"><td>Levi's</td></tr>
+					<tr onclick="addtag('the_body_shop')" style="background-image:url('img/the_body_shop.png');"><td>Body Shop</td></tr>
+					<tr onclick="addtag('the_source')" style="background-image:url('img/the_source.png');"><td>The Source</td></tr>
+					<tr onclick="addtag('the_bay')" style="background-image:url('img/the_bay.png');"><td>The Bay</td></tr>
+				<tbody></table>
+			</div>
+
+            <div class="band clicked" align="center">
+                <h1>else</h1>
+            </div>
+            <div class="band clicked" align="center" onclick="mylist()">
+                <h1>My List</h1>
+            </div>
+        </div>
+        <!-- order --> 
+
+        <!-- liste -->        
+        <div id="liste" class="screenoff">
+            <label>Add items :</label>
+			<div style="margin:0px;position:relative;top:0px;left:0px;">
+				<input type="text" placeholder="item " id="iteminput" class="input" />
+				<div class="icon badd right clicked" style="margin-right:10%;" onclick="additem()"></div>
+            </div>
+			<div id="items"></div>
+			
+			<label>Total :</label>
+            <input id="total" type="text" placeholder="$" class="input"></input>
+			
+			<label>reward :</label>
+            <input id="for" type="text" placeholder="$" class="input"></input>
+			
+            <div class="band clicked" onclick="show('order')" align="center">
+                <div class="icon add right"></div>
+                <h1>add a shop</h1>
+            </div>
+            <div class="band clicked" align="center" onclick="submit()">
+                <div class="icon arrowright right"></div>
+                <h1>Submit</h1>
+            </div>
+			<h1 id="resp"></h1>
+        </div>
+        <!-- liste -->    
+
+        <!-- transaction -->        
+        <div id="transaction" class="screenoff">
+			<div id="itemsfinish"></div>
+            <div class="band clicked" align="center" onclick="submit()">
+                <div class="icon compass right"></div>
+                <h1 id="liststatus">Online</h1>
+            </div>
+            <div class="band clicked" align="center" onclick="submit()">
+                <div class="icon arrowright right"></div>
+                <h1>Finish</h1>
+            </div>
+			<div id="from"></div>
+        </div>
+        <!-- transaction -->   
+        <!-- else --> 
+        <div id="else"  style=""  class="screenoff">
+        
+            <label>Name :</label>
+            <input type="text" placeholder="Name" class="input"></input>
+            <label>phone :</label>
+            <input type="number" placeholder="514 996 1809" class="input"></input>
+
+            <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+            <label for="checkboxG1" class="css-label">Option 1</label>
+            <input type="checkbox" name="checkboxG2" id="checkboxG2" class="css-checkbox" />
+            <label for="checkboxG2" class="css-label">Option 2</label>
+            <input type="checkbox" name="checkboxG3" id="checkboxG3" class="css-checkbox" />
+            <label for="checkboxG3" class="css-label">Option 3</label>
+             
+
+
+            <label>Quality 1</label>
+            <div class="rating">
+                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1"/>
+                <label for="rating-input-1-5" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1"/>
+                <label for="rating-input-1-4" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1"/>
+                <label for="rating-input-1-3" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1"/>
+                <label for="rating-input-1-2" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1"/>
+                <label for="rating-input-1-1" class="rating-star"></label>
+            </div>
+            <label>Quality 2</label>
+            <div class="rating">
+                <input type="radio" class="rating-input" id="rating-input-2-5" name="rating-input-2"/>
+                <label for="rating-input-2-5" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-2-4" name="rating-input-2"/>
+                <label for="rating-input-2-4" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-2-3" name="rating-input-2"/>
+                <label for="rating-input-2-3" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-2-2" name="rating-input-2"/>
+                <label for="rating-input-2-2" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-2-1" name="rating-input-2"/>
+                <label for="rating-input-2-1" class="rating-star"></label>
+            </div>
+            <label>Quality 3</label>
+            <div class="rating">
+                <input type="radio" class="rating-input" id="rating-input-3-5" name="rating-input-3"/>
+                <label for="rating-input-3-5" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-3-4" name="rating-input-3"/>
+                <label for="rating-input-3-4" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-3-3" name="rating-input-3"/>
+                <label for="rating-input-3-3" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-3-2" name="rating-input-3"/>
+                <label for="rating-input-3-2" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-3-1" name="rating-input-3"/>
+                <label for="rating-input-3-1" class="rating-star"></label>
+            </div>
+
+            <hr/>
+
+            <div class="band clicked" id="btn3" align="center">
+                <div class="icon arrowleft right"></div>
+                <h1>Submit</h1>
+            </div>
+            <hr>
+        </div>
+
+		
+		 <!-- deliver -->   
+        <div id="deliver" style=""  class="screenoff">
+            <div id="map-canvas"></div>
+			<div id="mapclicked">
+			</div>
+			
+			<div id="faceback"  style="display:none;position:relative;width: 100%;height:180px;">
+				<div  class="facemed">
+					
+				</div>
+					<div class="icon finish right clicked"></div>
+					<div onclick="window.open('tel:5149961809');" class="icon phone left clicked"></div>
+					<h1>Zakaria</h1>
+			</div>
+        </div>
+		 <!-- deliver -->
+		 <!-- check -->   
+        <div id="check" style=""  class="screenoff">
+            <div id="map-canvas"></div>
+			<div id="mapclicked">
+			</div>
+        </div>
+		 <!-- check -->   
+
+        
+    </body>
+</html>
